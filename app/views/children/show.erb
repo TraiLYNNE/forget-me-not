@@ -1,0 +1,17 @@
+<a href="/children">Back to Children</a>
+<h1><%= @child.first_name %> <%= @child.last_name %> Deatils</h1>
+
+<a href="/children/<%= @child.id %>/edit">Edit</a>
+
+<h2>Birthday</h2>
+<p><%= @child.birth_date %>, <%= @child.birth_year %>
+
+<h2>Parent(s)</h2>
+<% @child.adults.each do |adult| %>
+  <p><a href="/adults/<%= adult.slug %>"<%= adult.first_name %> <%= adult.last_name %></p>
+<% end %>
+
+<form method="POST" action="/children/<%= @children.id %>/delete">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete"/>
+</form>

@@ -9,7 +9,7 @@
 <h2>Anniversary</h2>
 <p><%= @adult.anni_date %>, <%= @adult.anni_year %></p>
 
-<h2>Children</h2>
+<h2>Child(ren)</h2>
 <% @adult.children.each do |child| %>
   <p><%= child.first_name %> <%= child.last_name %></p>
 <% end %>
