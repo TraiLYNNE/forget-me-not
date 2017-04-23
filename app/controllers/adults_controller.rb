@@ -26,9 +26,11 @@ class AdultsController < ApplicationController
     end
   end
 
-  get '/adults/:slug/edit' do
+  get '/adults/:id/edit' do
     if logged_in?
-      @adult = Adult.find_by_slug(params[:slug])
+      @adult = Adult.find_by_id(params[:id])
+
+      @children = current_user.children
       erb :'adults/edit'
     else
       redirect to '/login'
@@ -41,6 +43,23 @@ class AdultsController < ApplicationController
     else
       adult = Adult.create(params[:adult])
       current_user.adults << adult
+
+      if params["child"]["first_name"] != "" || params["child"]["last_name"] != "" || params["child"]["birth_date"] != ""
+        adult.children << child = Child.create(params[:child])
+        current_user.children << child
+      end
+
+      redirect to "/adults/#{adult.slug}"
+    end
+  end
+
+  patch '/adults/:id' do
+    adult = Adult.find_by_id(params[:id])
+
+    if params["adult"]["first_name"] == "" || params["adult"]["last_name"] == "" || params["adult"]["birth_date"] == ""
+      redirect to "/adults/#{adult.id}/edit"
+    else
+      adult.update(params[:adult])
 
       if params["child"]["first_name"] != "" || params["child"]["last_name"] != "" || params["child"]["birth_date"] != ""
         adult.children << child = Child.create(params[:child])

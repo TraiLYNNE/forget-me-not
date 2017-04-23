@@ -45,10 +45,11 @@
     </p>
 
     <h4>Or, choose an existing child:</h4>
-      <% @children. each do |child| %>
+      <% @children.each do |child| %>
         <input id="child_<%= child.id %>" type="checkbox" name="adult[child_ids][]" value="<%= child.id %>">
           <%= child.first_name %> <%= child.last_name %>
         </input>
+        <br>
       <% end %>
 
   <input type="submit" value="Create Adult"/>

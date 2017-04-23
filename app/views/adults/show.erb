@@ -1,7 +1,7 @@
 <a href="/adults">Back to Adults</a>
 <h1><%= @adult.first_name %> <%= @adult.last_name %> Deatils</h1>
 
-<a href="/adults/@adult.slug/edit">Edit</a>
+<a href="/adults/<%= @adult.id %>/edit">Edit</a>
 
 <h2>Birthday</h2>
 <p><%= @adult.birth_date %>, <%= @adult.birth_year %>
