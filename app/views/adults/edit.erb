@@ -1,9 +1,9 @@
-<h1>Adult Creation</h1>
-<p>Create a new adult below:</p>
+<h1>Edit <%= @adult.first_name %> <%= @adult.last_name %></h1>
+<p>Edit the information below:</p>
 
 <form method="POST" action="/adults/<%= @adult.id %>">
   <input type="hidden" name="_method" value="patch"/>
-  <h2> Adults Details:</h2>
+  <h2> Adult's Details:</h2>
 
     <p>
       <label for="first_name">First Name:</label>

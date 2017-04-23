@@ -1,24 +1,26 @@
-<h1>Child Creation</h1>
-<p>Create a new child below:</p>
+<h1>Edit <%= @child.first_name %> <%= @child.last_name %></h1>
+<p>Edit the information below:</p>
 
-<form method="POST" action="/children">
+<form method="POST" action="/children/<%= @child.id %>">
+  <input type="hidden" name="_method" value="patch"/>
   <h2> Child's Details:</h2>
 
     <p>
       <label for="first_name">First Name:</label>
-      <input id="first_name" type="text" name="child[first_name]"/>
+      <input id="first_name" type="text" name="child[first_name]" value="<%= @child.first_name %>"/>
     </p>
 
     <p>
       <label for="last_name">Last Name:</label>
-      <input id="last_name" type="text" name="child[last_name]"/>
+      <input id="last_name" type="text" name="child[last_name]" value="<%= @child.last_name %>"/>
     </p>
 
     <p>
       <label>Birthday:</label>
-      <input type="text" name="child[birth_date]" placeholder="Month & Day"/>
-      <input type="text" name="child[birth_year]" placeholder="Year"/>
+      <input type="text" name="child[birth_date]" placeholder="Month & Day" value="<%= @child.birth_date %>"/>
+      <input type="text" name="child[birth_year]" placeholder="Year" value="<%= @child.birth_year %>"/>
     </p>
+
 
   <h2>Add Parent(s)</h2>
     <h4> Add a New Adult:</h4>
@@ -40,11 +42,11 @@
 
     <h4>Or, choose an existing child:</h4>
       <% @adults.each do |adult| %>
-        <input id="adult_<%= adult.id %>" type="checkbox" name="child[adult_ids][]" value="<%= adult.id %>">
+        <input id="adult_<%= adult.id %>" type="checkbox" name="child[adult_ids][]" value="<%= adult.id %>" <%= 'checked' if @child.adults.include?(adult) %>>
           <%= adult.first_name %> <%= adult.last_name %>
         </input>
         <br>
       <% end %>
 
-  <input type="submit" value="Create Child"/>
+  <input type="submit" value="Save Changes"/>
 </form>
