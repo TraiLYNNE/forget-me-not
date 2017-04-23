@@ -1,7 +1,7 @@
 <h1>Child Creation</h1>
 <p>Create a new child below:</p>
 
-<form method="POST" action="/adults">
+<form method="POST" action="/children">
   <h2> Childs Details:</h2>
 
     <p>
@@ -39,8 +39,8 @@
     </p>
 
     <h4>Or, choose an existing child:</h4>
-      <% @adults.each do |child| %>
-        <input id="adult_<%= child.id %>" type="checkbox" name="child[adult_ids][]" value="<%= adult.id %>">
+      <% @adults.each do |adult| %>
+        <input id="adult_<%= adult.id %>" type="checkbox" name="child[adult_ids][]" value="<%= adult.id %>">
           <%= adult.first_name %> <%= adult.last_name %>
         </input>
         <br>
