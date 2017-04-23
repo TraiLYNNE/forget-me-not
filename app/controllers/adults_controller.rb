@@ -1,17 +1,18 @@
 class AdultsController < ApplicationController
-  get '/adults/:slug' do
-    if logged_in?
-      @adult = Adult.find_by_slug(params[:slug])
-      erb :'adults/show'
-    else
-      redirect to '/login'
-    end
-  end
 
   get '/adults/new' do
     if logged_in?
       @children = current_user.children
       erb :'adults/create_adult'
+    else
+      redirect to '/login'
+    end
+  end
+
+  get '/adults/:slug' do
+    if logged_in?
+      @adult = Adult.find_by_slug(params[:slug])
+      erb :'adults/show'
     else
       redirect to '/login'
     end

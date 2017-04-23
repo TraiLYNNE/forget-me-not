@@ -5,5 +5,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use UsersController
+use AdultsController
 use Rack::MethodOverride
 run ApplicationController
