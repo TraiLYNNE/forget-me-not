@@ -1,5 +1,7 @@
 <h1><%= @adult.first_name %> <%= @adult.last_name %> Deatils</h1>
 
+<a href="/adults/@adult.slug/edit">Edit</a>
+
 <h2>Birthday</h2>
 <p><%= @adult.birth_date %>, <%= @adult.birth_year %>
 
@@ -10,3 +12,8 @@
 <% @adult.children.each do |child| %>
   <p><%= child.first_name %> <%= child.last_name %></p>
 <% end %>
+
+<form method="POST" action="/adults/<%= @adult.slug %>/delete">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete"/>
+</form>

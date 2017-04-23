@@ -1,4 +1,12 @@
 class AdultsController < ApplicationController
+  get '/adults' do
+    if logged_in?
+      @adults = current_user.adults
+      erb :'adults/index'
+    else
+      redirect to '/login'
+    end
+  end
 
   get '/adults/new' do
     if logged_in?
@@ -18,6 +26,15 @@ class AdultsController < ApplicationController
     end
   end
 
+  get '/adults/:slug/edit' do
+    if logged_in?
+      @adult = Adult.find_by_slug(params[:slug])
+      erb :'adults/edit'
+    else
+      redirect to '/login'
+    end
+  end
+
   post '/adults' do
     if params["adult"]["first_name"] == "" || params["adult"]["last_name"] == "" || params["adult"]["birth_date"] == "" || params["adult"]["birth_year"] == ""
       redirect to '/adults/new'
@@ -32,5 +49,12 @@ class AdultsController < ApplicationController
 
       redirect to "/adults/#{adult.slug}"
     end
+  end
+
+  delete '/adults/:slug/delete' do
+    adult = Adult.find_by_slug(params[:slug])
+    adult.destroy
+
+    redirect to '/adults'
   end
 end
