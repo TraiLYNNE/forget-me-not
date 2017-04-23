@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  get '/users/home' do
+    if logged_in?
+      erb :'users/show'
+    else
+      redirect to '/login'
+    end
+  end
+
   get '/signup' do
     if !logged_in?
       erb :'users/create_user'
@@ -20,7 +28,7 @@ class UsersController < ApplicationController
       user = User.create(username:params[:username], email: params[:email], password:params[:password])
       session[:user_id] = user.id
 
-      redirect to '/'
+      redirect to '/users/home'
     end
   end
 
@@ -28,7 +36,7 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/"
+      redirect "/users/home"
     else
       redirect to '/signup'
     end
