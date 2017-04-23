@@ -1,0 +1,7 @@
+<h1>All Adults</h1>
+
+<ul>
+  <% @adults.each do |adult| %>
+    <li><a href="/adults/<%= adult.slug %>"><%= adult.last_name %>, <%= adult.first_name %></a></li>
+  <% end %>
+</ul>

@@ -1,7 +1,7 @@
 class AdultsController < ApplicationController
   get '/adults' do
     if logged_in?
-      @adults = current_user.adults
+      @adults = current_user.adults.sort_by{|a| a.last_name}
       erb :'adults/index'
     else
       redirect to '/login'
@@ -36,25 +36,18 @@ class AdultsController < ApplicationController
   end
 
   post '/adults' do
-    if params["adult"]["first_name"] == "" || params["adult"]["last_name"] == "" || params["adult"]["birth_date"] == "" || params["adult"]["birth_year"] == ""
+    if params["adult"]["first_name"] == "" || params["adult"]["last_name"] == "" || params["adult"]["birth_date"] == ""
       redirect to '/adults/new'
     else
       adult = Adult.create(params[:adult])
       current_user.adults << adult
 
-      if params["child"]["first_name"] != "" || params["child"]["last_name"] != ""
+      if params["child"]["first_name"] != "" || params["child"]["last_name"] != "" || params["child"]["birth_date"] != ""
         adult.children << child = Child.create(params[:child])
         current_user.children << child
       end
 
       redirect to "/adults/#{adult.slug}"
     end
-  end
-
-  delete '/adults/:slug/delete' do
-    adult = Adult.find_by_slug(params[:slug])
-    adult.destroy
-
-    redirect to '/adults'
   end
 end

@@ -1,3 +1,4 @@
+<a href="/adults">Back to Adults</a>
 <h1><%= @adult.first_name %> <%= @adult.last_name %> Deatils</h1>
 
 <a href="/adults/@adult.slug/edit">Edit</a>
@@ -13,7 +14,7 @@
   <p><%= child.first_name %> <%= child.last_name %></p>
 <% end %>
 
-<form method="POST" action="/adults/<%= @adult.slug %>/delete">
+<form method="POST" action="/adults/<%= @adult.id %>/delete">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete"/>
 </form>

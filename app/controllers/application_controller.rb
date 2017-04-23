@@ -13,6 +13,14 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  delete '/adults/:id/delete' do
+    adult = Adult.find_by_id(params[:id])
+
+    adult.delete
+
+    redirect to '/adults'
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
