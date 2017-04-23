@@ -11,7 +11,7 @@ class AdultsController < ApplicationController
   get '/adults/new' do
     if logged_in?
       @children = current_user.children
-      erb :'adults/create_adult'
+      erb :'adults/new'
     else
       redirect to '/login'
     end
