@@ -1,0 +1,12 @@
+<h1><%= @adult.first_name %> <%= @adult.last_name %> Deatils</h1>
+
+<h2>Birthday</h2>
+<p><%= @adult.birth_date %>, <%= @adult.birth_year %>
+
+<h2>Anniversary</h2>
+<p><%= @adult.anni_date %>, <%= @adult.anni_year %></p>
+
+<h2>Children</h2>
+<% @adult.children.each do |child| %>
+  <p><%= child.first_name %> <%= child.last_name %></p>
+<% end %>
