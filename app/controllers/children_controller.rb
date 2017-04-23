@@ -17,6 +17,15 @@ class ChildrenController < ApplicationController
     end
   end
 
+  get '/children/:slug' do
+    if logged_in?
+      @child = Child.find_by_slug(params[:slug])
+      erb :'children/show'
+    else
+      redirect to '/login'
+    end
+  end
+
   post '/children' do
     if params["child"]["first_name"] == "" || params["child"]["last_name"] == "" || params["child"]["birth_date"] == ""
       redirect to '/children/new'
