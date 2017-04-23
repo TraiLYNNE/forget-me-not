@@ -1,2 +1,55 @@
 <h1>Adult Creation</h1>
 <p>Create a new adult below:</p>
+
+<form method="POST" method="/adults">
+  <h2> Adults Details:</h2>
+
+    <p>
+      <label for="first_name">First Name:</label>
+      <input id="first_name" type="text" name="adult[first_name]"/>
+    </p>
+
+    <p>
+      <label for="last_name">Last Name:</label>
+      <input id="last_name" type="text" name="adult[last_name]"/>
+    </p>
+
+    <p>
+      <label>Birthday:</label>
+      <input type="text" name="adult[birth_date]" placeholder="Month & Day"/>
+      <input type="text" name="adult[birth_year]" placeholder="Year"/>
+    </p>
+
+    <p>
+      <label>Anniversary:</label>
+      <input type="text" name="adult[anni_date]" placeholder="Month & Day"/>
+      <input type="text" name="adult[anni_year]" placeholder="year"/>
+    </p>
+
+  <h2>Add Child(ren)</h2>
+    <h4> Add a New Child:</h4>
+    <p>
+      <label for="child_f_name">First Name:</label>
+      <input id="child_f_name" type="text" name="child[first_name]"/>
+    </p>
+
+    <p>
+      <label for="child_l_name">Last Name:</label>
+      <input id="child_l_name" type="text" name="child[last_name]"/>
+    </p>
+
+    <p>
+      <label>Birthday:</label>
+      <input type="text" name="child[birth_date]" placeholder="Month & Day"/>
+      <input type="text" name="child[birth_year]" placeholder="Year"/>
+    </p>
+
+    <h4>Or, choose an existing child:</h4>
+      <% @children. each do |child| %>
+        <input id="child_<%= child.id %>" type="checkbox" name="adult[child_ids][]" value="<%= child.id %>">
+          <%= child.first_name %> <%= child.last_name %>
+        </input>
+      <% end %>
+
+  <input type="submit" value="Create Adult"/>
+</form>
