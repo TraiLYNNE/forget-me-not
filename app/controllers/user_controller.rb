@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   get '/signup' do
     if !logged_in?
       erb :'users/create_user'
+    else
+      redirect to '/users/home'
     end
   end
 
@@ -17,7 +19,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'/users/login'
     else
-      redirect to '/'
+      redirect to '/users/home'
     end
   end
 
