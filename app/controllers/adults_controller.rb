@@ -1,7 +1,7 @@
 class AdultsController < ApplicationController
   get '/adults' do
     if logged_in?
-      @adults = current_user.adults.sort_by{|a| a.last_name}
+      @adults = current_user.adults.sort_by{|a| a.slug}
       erb :'adults/index'
     else
       redirect to '/login'

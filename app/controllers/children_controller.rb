@@ -1,7 +1,7 @@
 class ChildrenController < ApplicationController
   get '/children' do
     if logged_in?
-      @children = current_user.children.sort_by{|a| a.last_name}
+      @children = current_user.children.sort_by{|c| c.slug}
       erb :'children/index'
     else
       redirect to '/login'

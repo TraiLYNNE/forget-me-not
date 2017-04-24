@@ -1,6 +1,10 @@
 <h1>Welcome to ForgetMeNot!!</h1>
 <p>Please login below:</p>
 
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
 <form method="POST" action="/login">
   <p>
     <label for="username">Username:</label>

@@ -1,7 +1,7 @@
 module Slugifiable
   module InstanceMethods
     def slug
-      "#{self.last_name}-#{self.first_name}"
+      "#{self.last_name.downcase}-#{self.first_name.downcase}"
     end
   end
 
