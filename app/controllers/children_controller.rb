@@ -1,7 +1,7 @@
 class ChildrenController < ApplicationController
   get '/children' do
     if logged_in?
-      @adults = current_user.children.sort_by{|a| a.last_name}
+      @children = current_user.children.sort_by{|a| a.last_name}
       erb :'children/index'
     else
       redirect to '/login'
@@ -11,7 +11,7 @@ class ChildrenController < ApplicationController
   get '/children/new' do
     if logged_in?
       @adults = current_user.adults
-      erb :'adults/new'
+      erb :'children/new'
     else
       redirect to '/login'
     end
@@ -41,11 +41,11 @@ class ChildrenController < ApplicationController
     if params["child"]["first_name"] == "" || params["child"]["last_name"] == "" || params["child"]["birth_date"] == ""
       redirect to '/children/new'
     else
-      child = Child.create(params[:adult])
+      child = Child.create(params[:child])
       current_user.children << child
 
       if params["adult"]["first_name"] != "" || params["adult"]["last_name"] != "" || params["adult"]["birth_date"] != ""
-        child.adults << adult = Child.create(params[:child])
+        child.adults << adult = Adult.create(params[:adult])
         current_user.adults << adult
       end
 
@@ -66,14 +66,14 @@ class ChildrenController < ApplicationController
         current_user.adults << adult
       end
 
-      redirect to "/children/#{children.slug}"
+      redirect to "/children/#{child.slug}"
     end
   end
 
   delete '/children/:id/delete' do
     child = Child.find_by_id(params[:id])
 
-    children.delete
+    child.delete
 
     redirect to '/children'
   end

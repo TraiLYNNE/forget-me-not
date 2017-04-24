@@ -10,58 +10,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
-  end
-
-  patch '/adults/:id' do
-    adult = Adult.find_by_id(params[:id])
-
-    if params["adult"]["first_name"] == "" || params["adult"]["last_name"] == "" || params["adult"]["birth_date"] == ""
-      redirect to "/adults/#{adult.id}/edit"
+    if logged_in?
+      redirect to '/users/home'
     else
-      adult.update(params[:adult])
-
-      if params["child"]["first_name"] != "" || params["child"]["last_name"] != "" || params["child"]["birth_date"] != ""
-        adult.children << child = Child.create(params[:child])
-        current_user.children << child
-      end
-
-      redirect to "/adults/#{adult.slug}"
+      erb :index
     end
   end
-
-  # patch '/children/:id' do
-  #   child = Child.find_by_id(params[:id])
-  #
-  #   if params["child"]["first_name"] == "" || params["child"]["last_name"] == "" || params["child"]["birth_date"] == ""
-  #     redirect to "/children/#{child.id}/edit"
-  #   else
-  #     child.update(params[:child])
-  #
-  #     if params["adult"]["first_name"] != "" || params["adult"]["last_name"] != "" || params["adult"]["birth_date"] != ""
-  #       child.adults << adult = Adult.create(params[:adult])
-  #       current_user.adults << adult
-  #     end
-  #
-  #     redirect to "/children/#{children.slug}"
-  #   end
-  # end
-
-  delete '/adults/:id/delete' do
-    adult = Adult.find_by_id(params[:id])
-
-    adult.delete
-
-    redirect to '/adults'
-  end
-
-  # delete '/children/:id/delete' do
-  #   child = Child.find_by_id(params[:id])
-  #
-  #   children.delete
-  #
-  #   redirect to '/children'
-  # end
 
   helpers do
     def logged_in?

@@ -1,5 +1,5 @@
 <a href="/adults">Back to Adults</a>
-<h1><%= @adult.first_name %> <%= @adult.last_name %> Deatils</h1>
+<h1><%= @adult.first_name %> <%= @adult.last_name %> Details</h1>
 
 <a href="/adults/<%= @adult.id %>/edit">Edit</a>
 
@@ -11,7 +11,7 @@
 
 <h2>Child(ren)</h2>
 <% @adult.children.each do |child| %>
-  <p><%= child.first_name %> <%= child.last_name %></p>
+  <p><a href="/children/<%= child.slug %>"><%= child.first_name %> <%= child.last_name %></a></p>
 <% end %>
 
 <form method="POST" action="/adults/<%= @adult.id %>/delete">
