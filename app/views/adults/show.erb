@@ -1,8 +1,6 @@
 <a href="/adults">Back to Adults</a>
 <h1><%= @adult.first_name %> <%= @adult.last_name %> Details</h1>
 
-<a href="/adults/<%= @adult.id %>/edit">Edit</a>
-
 <h2>Birthday</h2>
 <p><%= @adult.birth_date %>, <%= @adult.birth_year %>
 
@@ -14,7 +12,5 @@
   <p><a href="/children/<%= child.slug %>"><%= child.first_name %> <%= child.last_name %></a></p>
 <% end %>
 
-<form method="POST" action="/adults/<%= @adult.id %>/delete">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete"/>
-</form>
+
+<a href="/adults/<%= @adult.id %>/edit">Edit</a>

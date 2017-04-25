@@ -7,17 +7,17 @@
 
     <p>
       <label for="first_name">First Name:</label>
-      <input id="first_name" type="text" name="adult[first_name]" value="<%= @adult.first_name %>" requried/>
+      <input id="first_name" type="text" name="adult[first_name]" value="<%= @adult.first_name %>" required/>
     </p>
 
     <p>
       <label for="last_name">Last Name:</label>
-      <input id="last_name" type="text" name="adult[last_name]" value="<%= @adult.last_name %>" requried/>
+      <input id="last_name" type="text" name="adult[last_name]" value="<%= @adult.last_name %>" required/>
     </p>
 
     <p>
       <label>Birthday:</label>
-      <input type="text" name="adult[birth_date]" placeholder="Month & Day" value="<%= @adult.birth_date %>" requried/>
+      <input type="text" name="adult[birth_date]" placeholder="Month & Day" value="<%= @adult.birth_date %>" required/>
       <input type="text" name="adult[birth_year]" placeholder="Year" value="<%= @adult.birth_year %>"/>
     </p>
 
@@ -54,4 +54,9 @@
       <% end %>
 
   <input type="submit" value="Save Changes"/>
+</form>
+
+<form method="POST" action="/adults/<%= @adult.id %>/delete">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete"/>
 </form>
